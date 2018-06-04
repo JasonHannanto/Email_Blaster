@@ -1,6 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+
 //We dont need to assign to a variable b/c there is no return value
+require('./models/User');
 require('./services/passport');
+
+//Connect to DB
+mongoose.connect(keys.mongoURI);
 
 const app = express();  
 

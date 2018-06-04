@@ -1,9 +1,9 @@
 const passport = require('passport');
 
 //GET: Handles authentication login
-//scope = what access we want for user information
 module.exports = (app) => {
     app.get('/auth/google', passport.authenticate('google', {
+        //scope = what access we want for user information        
         scope: ['profile', 'email']
         })
     );
