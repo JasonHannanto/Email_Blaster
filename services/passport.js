@@ -7,6 +7,17 @@ const keys = require("../config/keys.js");
 
 const User = mongoose.model("users");
 
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+    //Find the correct user given the cookie
+    User.findById(id).then(user =>{
+        done(null, user);
+    });
+});
+
 //GoogleStrategy has internal identifier 'google'
 passport.use(
   new GoogleStrategy(
