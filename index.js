@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 
 //We dont need to assign to a variable b/c there is no return value
 require('./models/User');
@@ -10,6 +12,17 @@ require('./services/passport');
 mongoose.connect(keys.mongoURI);
 
 const app = express();  
+
+app.use(
+    //MaxAge = Age for cookies to exist in miliseconds
+    cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: [keys.cookieKey]
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Returns a function, and immediately calls function with app as parameter
 //Allows us to connect app to our route.

@@ -10,5 +10,9 @@ module.exports = (app) => {
 
     //GET: Handles Redirect after oAuth login
     //Google will see that a 2nd property (code) is being passes
-    app.get('/auth/google/callback', passport.authenticate('google'));  
-}
+    app.get('/auth/google/callback', passport.authenticate('google')); 
+    
+    app.get('/api/current_user', (req,res) => {
+        res.send(req.user);
+    });
+};
