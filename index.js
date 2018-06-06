@@ -28,9 +28,13 @@ app.use(passport.session());
 //Allows us to connect app to our route.
 require('./routes/authRoutes')(app);
 
-//PORT = Assigned by Heroku or 5000 (local)
-const PORT = process.env.PORT || 5000;
-//localhost:5000
-app.listen(PORT);
+// //PORT = Assigned by Heroku or 5000 (local)
+// const PORT = process.env.PORT||5000;
+// //localhost:5000
+// app.listen(PORT);
+
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 console.log("Server running on PORT " + PORT);
